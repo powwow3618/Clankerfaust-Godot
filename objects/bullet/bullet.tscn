@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dykrpnhjgien0"]
+
+[ext_resource type="Script" uid="uid://cfy3sqfxawdkd" path="res://objects/bullet/script/bullet.gd" id="1_ofkrt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmo65"]
+albedo_color = Color(0.7870783, 1.3476611e-05, 0.53734714, 1)
+roughness = 0.55
+emission_enabled = true
+emission = Color(1, 0.3659186, 0.4002634, 1)
+emission_energy_multiplier = 3.96
+
+[sub_resource type="SphereMesh" id="SphereMesh_2xx38"]
+material = SubResource("StandardMaterial3D_kmo65")
+radius = 0.18
+height = 0.345
+radial_segments = 6
+rings = 5
+is_hemisphere = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kmo65"]
+size = Vector3(0.0546875, 0.1473999, 0.05859375)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ofkrt"]
+size = Vector3(0.38964844, 0.40307617, 0.35546875)
+
+[node name="Bullet" type="RigidBody3D" unique_id=1207708087]
+mass = 0.001
+gravity_scale = 0.0
+script = ExtResource("1_ofkrt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=492298089]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("SphereMesh_2xx38")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1658920486]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -3.1868441e-09, -0.072906494)
+shape = SubResource("BoxShape3D_kmo65")
+disabled = true
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1991153213]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=138657077]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -6.06821e-09, -0.13882446)
+shape = SubResource("BoxShape3D_ofkrt")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_colision"]

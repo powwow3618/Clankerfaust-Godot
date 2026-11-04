@@ -1,0 +1,224 @@
+[gd_scene format=3 uid="uid://b16wt385dc3ih"]
+
+[ext_resource type="Script" uid="uid://cn7wiobd42wb8" path="res://objects/player/scripts/player_controler.gd" id="1_cqmt1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajil6"]
+albedo_color = Color(0.9727625, 0.7947351, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2xx38"]
+material = SubResource("StandardMaterial3D_ajil6")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2xx38"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ds4hc"]
+albedo_color = Color(0.7750634, 0.7750634, 0.7750634, 1)
+metallic = 0.15
+metallic_specular = 0.4
+roughness = 0.4
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2xx38"]
+material = SubResource("StandardMaterial3D_ds4hc")
+radius = 0.095
+height = 0.68
+radial_segments = 6
+rings = 4
+
+[sub_resource type="Gradient" id="Gradient_cqmt1"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.32544088, 0.3254409, 0.32544088, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ajil6"]
+gradient = SubResource("Gradient_cqmt1")
+fill_from = Vector2(0.6284404, 0.018348623)
+
+[sub_resource type="Gradient" id="Gradient_g7ett"]
+offsets = PackedFloat32Array(0.66233766)
+colors = PackedColorArray(0.33999997, 0.7250001, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2xx38"]
+gradient = SubResource("Gradient_g7ett")
+width = 82
+height = 39
+
+[sub_resource type="LabelSettings" id="LabelSettings_cqmt1"]
+font_size = 66
+font_color = Color(1.6845763e-06, 0.73746544, 0.1832973, 1)
+shadow_size = 14
+shadow_color = Color(0, 0, 0, 0.1882353)
+shadow_offset = Vector2(1.835, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g7ett"]
+font_size = 38
+font_color = Color(0.6477441, 0, 0.12810883, 1)
+shadow_size = 14
+shadow_color = Color(0, 0, 0, 0.1882353)
+shadow_offset = Vector2(1.835, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2xx38"]
+font_size = 36
+font_color = Color(1, 0.36, 0.36, 1)
+shadow_size = 14
+shadow_color = Color(0, 0, 0, 0.1882353)
+shadow_offset = Vector2(1.835, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ssrue"]
+font_size = 45
+font_color = Color(0.93179643, 0.59424573, 0, 1)
+shadow_size = 14
+shadow_color = Color(0, 0, 0, 0.1882353)
+shadow_offset = Vector2(1.835, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jnjyq"]
+font_size = 45
+font_color = Color(0.99999994, 0.16514495, 0.19364154, 1)
+shadow_size = 14
+shadow_color = Color(0, 0, 0, 0.1882353)
+shadow_offset = Vector2(1.835, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gnkmh"]
+font_size = 24
+font_color = Color(0.77859116, 0, 0.09543752, 1)
+shadow_size = 14
+shadow_color = Color(0, 0, 0, 0.1882353)
+shadow_offset = Vector2(1.835, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2xx38"]
+radius = 0.1
+height = 0.2
+radial_segments = 8
+rings = 6
+
+[sub_resource type="Curve" id="Curve_ajil6"]
+_limits = [0.0, 2.75, 0.0, 1.0]
+_data = [Vector2(0, 1.6376405), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.4777613, 0.0, 0, 0]
+point_count = 2
+
+[node name="Player" type="CharacterBody3D" unique_id=1948279131]
+script = ExtResource("1_cqmt1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=562879360]
+mesh = SubResource("BoxMesh_2xx38")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1527459089]
+shape = SubResource("BoxShape3D_2xx38")
+
+[node name="GunPivot" type="Node3D" parent="." unique_id=1838304105]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GunPivot" unique_id=349980434]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -1.3208787)
+mesh = SubResource("CapsuleMesh_2xx38")
+
+[node name="Node3D" type="Node3D" parent="GunPivot" unique_id=1540680189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.6631587)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=339764039]
+transform = Transform3D(1, 0, 0, 0, 0.22468813, 0.97443074, 0, -0.97443074, 0.22468813, 0, 15.404556, 1.8226886)
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1701994562]
+process_mode = 3
+
+[node name="ProgressBar" type="TextureProgressBar" parent="CanvasLayer" unique_id=1271888526]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -105.0
+offset_top = 85.0
+offset_right = 105.0
+offset_bottom = 104.0
+grow_horizontal = 2
+max_value = 3.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_ajil6")
+texture_progress = SubResource("GradientTexture2D_2xx38")
+
+[node name="UpgradeContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=1512826969]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -75.0
+offset_right = 245.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="CurrentHealth" type="Label" parent="CanvasLayer" unique_id=1752385342]
+offset_left = 116.0
+offset_top = 80.0
+offset_right = 154.0
+offset_bottom = 171.0
+text = "0"
+label_settings = SubResource("LabelSettings_cqmt1")
+
+[node name="Dash" type="Label" parent="CanvasLayer" unique_id=646564839]
+offset_left = 129.0
+offset_top = 62.0
+offset_right = 147.0
+offset_bottom = 115.0
+rotation = 0.7021955
+text = "/"
+label_settings = SubResource("LabelSettings_g7ett")
+
+[node name="MaxHealth" type="Label" parent="CanvasLayer" unique_id=1050978197]
+offset_left = 91.0
+offset_top = 32.0
+offset_right = 112.0
+offset_bottom = 82.0
+text = "0"
+label_settings = SubResource("LabelSettings_2xx38")
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1294309131]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -291.0
+offset_top = 63.0
+offset_right = -117.0
+offset_bottom = 131.0
+grow_horizontal = 0
+text = "Wave"
+label_settings = SubResource("LabelSettings_ssrue")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentWave" type="Label" parent="CanvasLayer" unique_id=891726841]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -131.0
+offset_top = 65.0
+offset_right = -85.0
+offset_bottom = 133.0
+grow_horizontal = 0
+text = "0"
+label_settings = SubResource("LabelSettings_jnjyq")
+vertical_alignment = 1
+
+[node name="EnemiesAlive" type="Label" parent="CanvasLayer/CurrentWave" unique_id=1167905171]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.0
+offset_top = -14.0
+offset_right = -4.0
+offset_bottom = 20.0
+grow_horizontal = 0
+text = "0"
+label_settings = SubResource("LabelSettings_gnkmh")
+vertical_alignment = 1
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=109352337]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.46178722, -0.1922645)
+emitting = false
+mesh = SubResource("SphereMesh_2xx38")
+emission_shape = 3
+emission_box_extents = Vector3(0.465, 0.01, 0.2)
+spread = 72.0
+gravity = Vector3(0, 0.83, 0)
+scale_amount_curve = SubResource("Curve_ajil6")

@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://beah662cjxmhk"]
+
+[ext_resource type="PackedScene" uid="uid://b16wt385dc3ih" path="res://objects/player/player.tscn" id="1_8e00y"]
+[ext_resource type="Script" uid="uid://dpe7eb65y58eq" path="res://scenes/main_level/scripts/wave_manager.gd" id="1_48npw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rqn6l"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_48npw"]
+sky_material = SubResource("ProceduralSkyMaterial_rqn6l")
+
+[sub_resource type="Environment" id="Environment_6gy0k"]
+background_mode = 2
+sky = SubResource("Sky_48npw")
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_2xx38"]
+vertices = PackedVector3Array(-74.5, 0.5, -74.5, -74.5, 0.5, 74.5, 74.5, 0.5, 74.5, 74.5, 0.5, -74.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80qqc"]
+albedo_color = Color(0.29643667, 0.56605047, 0.22095177, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ds4hc"]
+material = SubResource("StandardMaterial3D_80qqc")
+size = Vector2(500, 500)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ajil6"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a0aik"]
+points = PackedVector3Array(0.6833104, 1.3649828, 63.89876, -0.73666203, -1.474962, -63.89876, 0.6833104, -1.474962, -63.89876, -0.73666203, -1.474962, 63.89876, -0.73666203, 1.3649828, -63.89876, 0.6833104, 1.3649828, -63.89876, 0.6833104, -1.474962, 63.89876, -0.73666203, 1.3649828, 63.89876)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajil6"]
+albedo_color = Color(1, 1, 0.41960785, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rp1pg"]
+material = SubResource("StandardMaterial3D_ajil6")
+size = Vector3(1, 2.4766846, 127.32422)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f3hs1"]
+points = PackedVector3Array(0.6833104, 1.3649828, 63.89876, -0.73666203, -1.474962, -63.89876, 0.6833104, -1.474962, -63.89876, -0.73666203, -1.474962, 63.89876, -0.73666203, 1.3649828, -63.89876, 0.6833104, 1.3649828, -63.89876, 0.6833104, -1.474962, 63.89876, -0.73666203, 1.3649828, 63.89876)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1a8nn"]
+material = SubResource("StandardMaterial3D_ajil6")
+size = Vector3(1, 2.4766846, 127.32422)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4yy7h"]
+points = PackedVector3Array(0.6833104, 1.3649828, 63.89876, -0.73666203, -1.474962, -63.89876, 0.6833104, -1.474962, -63.89876, -0.73666203, -1.474962, 63.89876, -0.73666203, 1.3649828, -63.89876, 0.6833104, 1.3649828, -63.89876, 0.6833104, -1.474962, 63.89876, -0.73666203, 1.3649828, 63.89876)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vdntc"]
+material = SubResource("StandardMaterial3D_ajil6")
+size = Vector3(1, 2.4766846, 127.32422)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_00fyc"]
+points = PackedVector3Array(0.6833104, 1.3649828, 63.89876, -0.73666203, -1.474962, -63.89876, 0.6833104, -1.474962, -63.89876, -0.73666203, -1.474962, 63.89876, -0.73666203, 1.3649828, -63.89876, 0.6833104, 1.3649828, -63.89876, 0.6833104, -1.474962, 63.89876, -0.73666203, 1.3649828, 63.89876)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u2ilq"]
+material = SubResource("StandardMaterial3D_ajil6")
+size = Vector3(1, 2.4766846, 127.32422)
+
+[node name="Root" type="Node" unique_id=794203897]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1659742061]
+environment = SubResource("Environment_6gy0k")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=127049329]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="UserInterface" type="CanvasLayer" parent="." unique_id=1907788791]
+
+[node name="World3D" type="Node3D" parent="." unique_id=1643598846]
+script = ExtResource("1_48npw")
+
+[node name="Enemies" type="Node3D" parent="World3D" unique_id=754214056]
+
+[node name="Player" parent="World3D" unique_id=1948279131 instance=ExtResource("1_8e00y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5457014, 0)
+
+[node name="Map" type="Node3D" parent="World3D" unique_id=559488351]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="World3D/Map" unique_id=756073126]
+navigation_mesh = SubResource("NavigationMesh_2xx38")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World3D/Map/NavigationRegion3D" unique_id=358440913]
+mesh = SubResource("PlaneMesh_ds4hc")
+
+[node name="Ground" type="StaticBody3D" parent="World3D/Map" unique_id=446039957]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World3D/Map/Ground" unique_id=720116047]
+shape = SubResource("WorldBoundaryShape3D_ajil6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World3D/Map/Ground" unique_id=613019445]
+mesh = SubResource("PlaneMesh_ds4hc")
+
+[node name="Walls" type="StaticBody3D" parent="World3D/Map" unique_id=1462414630]
+
+[node name="Wall1" type="CollisionShape3D" parent="World3D/Map/Walls" unique_id=19099648]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63.602077, 0.7383423, 0)
+shape = SubResource("ConvexPolygonShape3D_a0aik")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World3D/Map/Walls/Wall1" unique_id=585216912]
+mesh = SubResource("BoxMesh_rp1pg")
+
+[node name="Wall2" type="CollisionShape3D" parent="World3D/Map/Walls" unique_id=1844056911]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.780135e-06, 0.7383423, -63.602077)
+shape = SubResource("ConvexPolygonShape3D_f3hs1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="World3D/Map/Walls/Wall2" unique_id=2039077216]
+mesh = SubResource("BoxMesh_1a8nn")
+
+[node name="Wall3" type="CollisionShape3D" parent="World3D/Map/Walls" unique_id=1034952799]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 63.602077, 0.7383423, 5.56027e-06)
+shape = SubResource("ConvexPolygonShape3D_4yy7h")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="World3D/Map/Walls/Wall3" unique_id=210123774]
+mesh = SubResource("BoxMesh_vdntc")
+
+[node name="Wall4" type="CollisionShape3D" parent="World3D/Map/Walls" unique_id=1432510841]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -8.340405e-06, 0.7383423, 63.602077)
+shape = SubResource("ConvexPolygonShape3D_00fyc")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="World3D/Map/Walls/Wall4" unique_id=1527758521]
+mesh = SubResource("BoxMesh_u2ilq")
+
+[node name="SpawnPoints" type="Node3D" parent="World3D" unique_id=1645304900]
+transform = Transform3D(0.5670366, 0, 0, 0, 0.9999996, 0, 0, 0, 0.69340855, 0, 0.3, 0)
+
+[node name="Node3D" type="Node3D" parent="World3D/SpawnPoints" unique_id=1341089427]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.377514, 0, 55.572815)
+
+[node name="Node3D3" type="Node3D" parent="World3D/SpawnPoints" unique_id=915639742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.579685, 0, -58.461243)
+
+[node name="Node3D4" type="Node3D" parent="World3D/SpawnPoints" unique_id=400077539]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.848263, 0, 54.493927)
+
+[node name="Node3D5" type="Node3D" parent="World3D/SpawnPoints" unique_id=756774980]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.975246, 0, 0.30700684)
+
+[node name="Node3D6" type="Node3D" parent="World3D/SpawnPoints" unique_id=1664041004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.146336, 0, 0.078014374)
+
+[node name="Node3D7" type="Node3D" parent="World3D/SpawnPoints" unique_id=604218875]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5925827, 0, 60.697628)
+
+[node name="Node3D8" type="Node3D" parent="World3D/SpawnPoints" unique_id=1335545654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6145172, 0, -56.753986)
+
+[node name="Node3D2" type="Node3D" parent="World3D/SpawnPoints" unique_id=203784508]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.583805, 0, -54.284424)

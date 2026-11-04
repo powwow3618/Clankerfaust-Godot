@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c051uivaglysr"]
+
+[ext_resource type="Script" uid="uid://da0eu3hv4ida3" path="res://objects/upgrade_card/scripts/upgrade_card.gd" id="1_yyxed"]
+
+[node name="UpgradeCard" type="Button" unique_id=119694355]
+custom_minimum_size = Vector2(150, 150)
+custom_maximum_size = Vector2(150, 150)
+mouse_default_cursor_shape = 2
+script = ExtResource("1_yyxed")
+
+[node name="Label" type="Label" parent="." unique_id=512409624]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.5
+offset_top = 22.0
+offset_right = 32.5
+offset_bottom = 45.0
+grow_horizontal = 2
+text = "nome"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

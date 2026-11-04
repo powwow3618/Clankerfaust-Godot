@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://ha02gjnneyck"]
+
+[ext_resource type="Script" uid="uid://c6yjasfcq1q52" path="res://objects/xp_ball/scripts/xp_ball.gd" id="1_wc5oh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajil6"]
+albedo_color = Color(1.5883148e-06, 0.56430835, 0.2222172, 1)
+emission_enabled = true
+emission = Color(2.4065375e-07, 0.4965139, 0.14557913, 1)
+emission_energy_multiplier = 8.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_2xx38"]
+material = SubResource("StandardMaterial3D_ajil6")
+radius = 0.37
+height = 0.75
+radial_segments = 4
+rings = 1
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vh24y"]
+points = PackedVector3Array(-0.16, 0, 0, 0, 0, -0.16, 0, -0.275, 0, 0, 0, 0.16, 0, 0.275, 0, 0.16, 0, 0)
+
+[node name="XpBall" type="Area3D" unique_id=1980045883]
+script = ExtResource("1_wc5oh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=696520498]
+mesh = SubResource("SphereMesh_2xx38")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2045141931]
+shape = SubResource("ConvexPolygonShape3D_vh24y")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cyfj0ihq71xpq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j6c8x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ds4hc"]
+albedo_color = Color(0.98606116, 0, 0.16151735, 1)
+metallic = 0.25
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_2q7ju"]
+material = SubResource("StandardMaterial3D_ds4hc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajil6"]
+albedo_color = Color(0.25565878, 0.25565878, 0.25565878, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2xx38"]
+material = SubResource("StandardMaterial3D_ajil6")
+size = Vector3(1.1533203, 0.20117188, 1.1914063)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2q7ju"]
+albedo_color = Color(0.5286484, 0.3067939, 0.34966376, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ajil6"]
+material = SubResource("StandardMaterial3D_2q7ju")
+size = Vector3(0.5185547, 0.3267212, 0.50878906)
+
+[node name="EnemySlime" type="RigidBody3D" unique_id=91174098]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=289332751]
+shape = SubResource("BoxShape3D_j6c8x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=166117996]
+mesh = SubResource("BoxMesh_2q7ju")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D" unique_id=797897295]
+mesh = SubResource("BoxMesh_2xx38")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1307819069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4407435, 0)
+mesh = SubResource("BoxMesh_ajil6")
