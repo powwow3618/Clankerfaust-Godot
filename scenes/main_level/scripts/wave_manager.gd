@@ -3,6 +3,7 @@ extends Node3D
 
 @onready var enemyBasicScene:PackedScene = load("res://objects/enemies/enemy_basic/enemy_basic.tscn")
 @onready var enemySlimeScene: PackedScene = load("res://objects/enemies/enemy_slime/enemy_slime.tscn")
+@onready var enemyBigScene: PackedScene = load("res://objects/enemies/enemy_big/enemy_big.tscn")
 
 var enemiesList: Array = []
 
@@ -21,7 +22,7 @@ var scan:float = scanTime
 
 func _ready() -> void:
 	spawnpointsLocations = $SpawnPoints.get_children()
-	enemiesList = [enemyBasicScene,enemySlimeScene]
+	enemiesList = [enemyBasicScene,enemySlimeScene,enemyBigScene]
 
 func _process(delta: float) -> void:
 	scan += delta
