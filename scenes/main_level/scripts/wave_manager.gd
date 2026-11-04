@@ -2,6 +2,9 @@ extends Node3D
 
 
 @onready var enemyBasicScene:PackedScene = load("res://objects/enemies/enemy_basic/enemy_basic.tscn")
+@onready var enemySlimeScene: PackedScene = load("res://objects/enemies/enemy_slime/enemy_slime.tscn")
+
+var enemiesList: Array = []
 
 var spawnpointsLocations: Array = []
 var maxWaveTimer: float = 6.0
@@ -18,6 +21,7 @@ var scan:float = scanTime
 
 func _ready() -> void:
 	spawnpointsLocations = $SpawnPoints.get_children()
+	enemiesList = [enemyBasicScene,enemySlimeScene]
 
 func _process(delta: float) -> void:
 	scan += delta
@@ -34,16 +38,23 @@ func _process(delta: float) -> void:
 
 	if currentWaveTimer == maxWaveTimer:
 		for i in range(currentWaveSize):
-			print("spawning")
-			var enemyCopy:RigidBody3D = enemyBasicScene.instantiate()
+			
+			var enemyWeight: int = randi_range(0,enemiesList.size()-1)
+
+			var enemyCopy:RigidBody3D = enemiesList[enemyWeight].instantiate()
+			
 			enemyCopy.speed *= speedScale * randf_range(0.6,1.2)
 			enemyCopy.health *= healthScale
-			enemyCopy.position = spawnpointsLocations[randi_range(0,(spawnpointsLocations.size()-1))].global_position
+
+			var spawnPosition: Vector3 = spawnpointsLocations[randi_range(0,(spawnpointsLocations.size()-1))].global_position
+
+			enemyCopy.position = spawnPosition * Vector3(randf_range(0.9,1.2),0,randf_range(0.9,1.2))
 			enemyCopy.targetToFollow = $Player
+
 			$Enemies.add_child(enemyCopy)
 			
-			enemiesToSpawn -= 1
-			currentSpawnedEnemies += 1
+			enemiesToSpawn -= enemyWeight + 1
+			currentSpawnedEnemies += enemyWeight + 1
 			
 		currentWaveTimer = maxWaveTimer
 	

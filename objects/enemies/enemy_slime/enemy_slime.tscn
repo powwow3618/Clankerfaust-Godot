@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://cyfj0ihq71xpq"]
 
+[ext_resource type="Script" uid="uid://8jmbvwmrcxfp" path="res://objects/enemies/enemy_slime/scripts/enemy_slime.gd" id="1_cwako"]
+[ext_resource type="Script" uid="uid://bni5ogp16v10p" path="res://objects/enemies/enemy_basic/scripts/cpu_particles_3d.gd" id="2_du4s6"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_j6c8x"]
+size = Vector3(1.2880859, 1, 1.3232422)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ds4hc"]
 albedo_color = Color(0.98606116, 0, 0.16151735, 1)
@@ -9,13 +13,14 @@ roughness = 0.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_2q7ju"]
 material = SubResource("StandardMaterial3D_ds4hc")
+size = Vector3(1.2880859, 1, 1.3115234)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajil6"]
 albedo_color = Color(0.25565878, 0.25565878, 0.25565878, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2xx38"]
 material = SubResource("StandardMaterial3D_ajil6")
-size = Vector3(1.1533203, 0.20117188, 1.1914063)
+size = Vector3(1.4453125, 0.12402344, 1.4431152)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2q7ju"]
 albedo_color = Color(0.5286484, 0.3067939, 0.34966376, 1)
@@ -24,7 +29,33 @@ albedo_color = Color(0.5286484, 0.3067939, 0.34966376, 1)
 material = SubResource("StandardMaterial3D_2q7ju")
 size = Vector3(0.5185547, 0.3267212, 0.50878906)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xc8n8"]
+size = Vector3(1.4794922, 1, 1.5849609)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4eiav"]
+radius = 0.17
+height = 0.355
+radial_segments = 4
+rings = 1
+
+[sub_resource type="Curve" id="Curve_x2hbk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.98936176, 0), -2.7552516, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_ty3ad"]
+radius = 0.1
+height = 0.2
+radial_segments = 8
+rings = 6
+
+[sub_resource type="Curve" id="Curve_dpewc"]
+_limits = [0.0, 2.75, 0.0, 1.0]
+_data = [Vector2(0, 1.6376405), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.4777613, 0.0, 0, 0]
+point_count = 2
+
 [node name="EnemySlime" type="RigidBody3D" unique_id=91174098]
+lock_rotation = true
+script = ExtResource("1_cwako")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=289332751]
 shape = SubResource("BoxShape3D_j6c8x")
@@ -38,3 +69,36 @@ mesh = SubResource("BoxMesh_2xx38")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1307819069]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4407435, 0)
 mesh = SubResource("BoxMesh_ajil6")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=614344]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=2104225548]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=811197619]
+shape = SubResource("BoxShape3D_xc8n8")
+debug_color = Color(0.99744016, 0, 0.17579108, 0.41960785)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=1243841896]
+emitting = false
+lifetime = 0.24
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("SphereMesh_4eiav")
+emission_shape = 1
+emission_sphere_radius = 0.55
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 19.72
+radial_accel_max = 55.37
+scale_amount_curve = SubResource("Curve_x2hbk")
+script = ExtResource("2_du4s6")
+
+[node name="CPUParticles3D2" type="CPUParticles3D" parent="." unique_id=69751104]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.43873, -0.0036126971)
+mesh = SubResource("SphereMesh_ty3ad")
+emission_shape = 3
+emission_box_extents = Vector3(0.465, 0.01, 0.2)
+spread = 72.0
+gravity = Vector3(0, 0.83, 0)
+scale_amount_curve = SubResource("Curve_dpewc")
+
+[connection signal="finished" from="CPUParticles3D" to="CPUParticles3D" method="_on_finished"]
